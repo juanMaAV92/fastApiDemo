@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "fastapidemo"
+version = "0.1.0"
+description = "This is a exercise to learn how use FastApi in a proffesional application"
+authors = ["juanMaAV92 <juanmanuel.armero@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.0.0"
+pytest = "^7.2.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
