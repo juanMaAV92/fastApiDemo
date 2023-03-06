@@ -1,12 +1,15 @@
 [tool.poetry]
 name = "fastapidemo"
 version = "0.1.0"
-description = "This is a exercise to learn how use FastApi in a proffesional application"
+description = "This is a exercise to learn how use FastApi in a profesional application"
 authors = ["juanMaAV92 <juanmanuel.armero@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+fastapi = "^0.92.0"
+uvicorn = "^0.20.0"
+pydantic = {extras = ["dotenv", "email"], version = "^1.10.5"}
 
 
 [tool.poetry.group.dev.dependencies]
