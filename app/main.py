@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 
 from core.config import settings
 
-
+print(str(settings.SQLALCHEMY_DATABASE_URI))
 app = FastAPI(
     title = settings.PROJECT_NAME, 
     description = settings.PROJECT_DESCRIPTION,

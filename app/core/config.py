@@ -24,7 +24,7 @@ class Settings( BaseSettings ):
 
     POSTGRES_USER : str
     POSTGRES_PASSWORD : str
-    POSTGRES_SERVER : str
+    POSTGRES_HOST : str
     POSTGRES_PORT : int
     POSTGRES_DB : str
     SQLALCHEMY_DATABASE_URI : Optional[ PostgresDsn ]
@@ -38,7 +38,7 @@ class Settings( BaseSettings ):
             scheme="postgresql",
             user=values.get("POSTGRES_USER" ),
             password=values.get( "POSTGRES_PASSWORD" ),
-            host=values.get( "POSTGRES_SERVER" ),
+            host=values.get( "POSTGRES_HOST" ),
             port=str(values.get( 'POSTGRES_PORT' )),
             path=f"/{values.get( 'POSTGRES_DB' ) or '' }",
         )
@@ -49,7 +49,7 @@ class Settings( BaseSettings ):
 
     class Config :
         try:
-            env_file = f"{os.path.dirname(os.path.abspath(__file__))}/../.env"
+            env_file = f"{os.path.dirname(os.path.abspath(__file__))}/../../.env"
             env_file_encoding = 'utf-8'
             case_sensitive = True
         except:

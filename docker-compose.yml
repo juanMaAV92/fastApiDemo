@@ -1,0 +1,18 @@
+
+version: '3'
+services:
+
+  dbPG:
+    image: postgres
+    volumes:
+      - app-dbpg-data:/var/lib/postgresql/data
+    container_name: postgres
+    ports:
+      - '6500:5432'
+    restart: always
+    env_file:
+      - ./.env 
+    
+    
+volumes:
+  app-dbpg-data:
