@@ -8,7 +8,21 @@ Run in local
 docker-compose up -d
 
 cd ~/fastApiDemo
+export PYTHONPATH=$PWD
 poetry run python app/main.py
+```
+
+
+# Alembic
+
+New revision
+
+```sh
+cd ~/fastApiDemo
+while read line; do export $line; done < .env
+printenv PROJECT_VERSION  
+alembic upgrade head
+alembic revision --autogenerate -m "some useful message
 ```
 
 API documentation http://localhost:5000/docs also http://localhost:5000/redoc
