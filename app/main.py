@@ -1,13 +1,16 @@
 
-
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
-from api.api_v1.api import api_router
-from core.config import settings
+from app.api.api_v1.api import api_router
+from app.core.config import settings
+from app.db.session import engine
+from app.db.base import Base
 
-print(str(settings.SQLALCHEMY_DATABASE_URI))
+
+Base.metadata.create_all( bind= engine )
+
 app = FastAPI(
     title = settings.PROJECT_NAME, 
     description = settings.PROJECT_DESCRIPTION,

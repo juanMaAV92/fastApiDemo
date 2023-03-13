@@ -13,8 +13,7 @@ config = context.config
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
-if config.config_file_name is not None:
-    fileConfig(config.config_file_name)
+fileConfig(config.config_file_name)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
@@ -35,7 +34,6 @@ def get_url():
     host = os.getenv("POSTGRES_HOST", "db")
     port = os.getenv("POSTGRES_PORT", '5432')
     db = os.getenv("POSTGRES_DB", "app")
-    # print(f"postgresql://{user}:{password}@{host}:{port}/{db}")
     return f"postgresql://{user}:{password}@{host}:{port}/{db}"
 
 
@@ -51,8 +49,11 @@ def run_migrations_offline() -> None:
     script output.
 
     """
+
+
     # url = config.get_main_option("sqlalchemy.url")
     url = get_url
+    print(url)
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -73,6 +74,7 @@ def run_migrations_online() -> None:
     """
     configuration = config.get_section(config.config_ini_section)
     configuration["sqlalchemy.url"] = get_url()
+    print(configuration["sqlalchemy.url"])
     connectable = engine_from_config(
         # config.get_section(config.config_ini_section, {}),
         configuration,
