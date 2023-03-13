@@ -3,7 +3,7 @@
 from fastapi import APIRouter
 
 
-from api.api_v1.endpoints import organizations, headquarters
+from app.api.api_v1.endpoints import organizations, headquarters
 
 
 api_router = APIRouter()

@@ -18,6 +18,7 @@ psycopg2 = "^2.9.5"
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
 pytest = "^7.2.1"
+httpx = "^0.23.3"
 
 [build-system]
 requires = ["poetry-core"]

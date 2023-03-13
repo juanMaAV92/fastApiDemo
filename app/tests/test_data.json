@@ -1,0 +1,74 @@
+{
+    "organizations" : [
+        {
+            "description": "description1",
+            "address": "address1",
+            "phone": "phone1",
+            "email": "email1@organization.com",
+            "id": 1
+        },{
+            "description": "description2",
+            "address": "address2",
+            "phone": "phone2",
+            "email": "email2@organization.com",
+            "id": 2
+        },{
+            "description": "description3",
+            "address": "address3",
+            "phone": "phone3",
+            "email": "email3@organization.com",
+            "id": 3
+        },{
+            "description": "description4",
+            "address": "address4",
+            "phone": "phone4",
+            "email": "email4@organization.com",
+            "id": 4
+        }
+    ],
+    "headquarters" : [
+        {
+            "name": "name1",
+            "address": "address1",
+            "phone": "phone1",
+            "email": "email1@headquarter.com",
+            "organization_id": null,
+            "id": 1
+        },{
+            "name": "name2",
+            "address": "address2",
+            "phone": "phone2",
+            "email": "email2@headquarter.com",
+            "organization_id": 2,
+            "id": 2
+        },{
+            "name": "name3",
+            "address": "address3",
+            "phone": "phone3",
+            "email": "email3@headquarter.com",
+            "organization_id": 2,
+            "id": 3
+        },{
+            "name": "name4",
+            "address": "address4",
+            "phone": "phone4",
+            "email": "email4@headquarter.com",
+            "organization_id": 4,
+            "id": 4
+        },{
+            "name": "name5",
+            "address": "address5",
+            "phone": "phone5",
+            "email": "email5@headquarter.com",
+            "organization_id": 4,
+            "id": 5
+        },{
+            "name": "name6",
+            "address": "address6",
+            "phone": "phone6",
+            "email": "email6@headquarter.com",
+            "organization_id": 4,
+            "id": 6
+        }
+    ]
+}
