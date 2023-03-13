@@ -32,4 +32,4 @@ class CRUDHeadquarter(CRUDBase[Headquarter, HeadquarterCreate, HeadquarterUpdate
         )
 
 
-headquarter = CRUDHeadquarter(Headquarter)
+headquarter = CRUDHeadquarter( Headquarter )

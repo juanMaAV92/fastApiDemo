@@ -13,12 +13,12 @@ class HeadquarterBase( BaseModel ):
     organization_id: Optional[ int ] = None  
 
 
-# Properties to receive on item creation
+# Properties to receive via API on creation
 class HeadquarterCreate( HeadquarterBase ):
     pass
 
 
-# Properties to receive on item update
+# Properties to receive via API on update
 class HeadquarterUpdate( HeadquarterBase ):
     pass
 
@@ -34,11 +34,11 @@ class HeadquarterInDBBase( HeadquarterBase ):
 
 
 
-# Properties to return to client
+# Additional properties to return via API
 class Headquarter( HeadquarterInDBBase ):
     pass
 
 
-# Properties stored in DB
+# Additional properties stored in DB
 class HeadquarterInDB ( HeadquarterInDBBase ):
     pass

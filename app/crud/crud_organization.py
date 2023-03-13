@@ -11,4 +11,4 @@ class CRUDOrganization(CRUDBase[Organization, OrganizationCreate, OrganizationUp
     pass
 
 
-organization = CRUDOrganization() 
+organization = CRUDOrganization( Organization ) 

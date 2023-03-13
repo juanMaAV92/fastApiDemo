@@ -4,7 +4,6 @@ from functools import lru_cache
 
 from typing import Any, Dict, Optional
 from pydantic import BaseSettings, EmailStr, PostgresDsn, validator
-import pydantic
 
 
 class Settings( BaseSettings ):
@@ -48,14 +47,12 @@ class Settings( BaseSettings ):
     USERS_OPEN_REGISTRATION : bool = False
 
     class Config :
-        try:
-            env_file = f"{os.path.dirname(os.path.abspath(__file__))}/../../.env"
-            env_file_encoding = 'utf-8'
-            case_sensitive = True
-        except:
-            env_file = '.env_dev'
-            env_file_encoding = 'utf-8'
-            case_sensitive = True
+        separador = os.path.sep
+        dir_actual = os.path.dirname(os.path.abspath(__file__))
+        dir = separador.join(dir_actual.split(separador)[:-2])
+        env_file = dir + '/.env'
+        env_file_encoding = 'utf-8'
+        case_sensitive = True
 
 @lru_cache
 def get_settings() -> Settings:

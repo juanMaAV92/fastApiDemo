@@ -12,7 +12,7 @@ class OrganizationBase( BaseModel ):
     email: str
 
 
-# Properties to receive on item creation
+# Properties to receive via API on creation
 class OrganizationCreate( OrganizationBase ):
     name: str = Field( min_length=3, max_length=20 )
     type: str 
@@ -20,7 +20,7 @@ class OrganizationCreate( OrganizationBase ):
     identification: str
 
 
-# Properties to receive on item update
+# Properties to receive via API on update
 class OrganizationUpdate( OrganizationBase ):
     pass
 
@@ -36,11 +36,11 @@ class OrganizationInDBBase( OrganizationBase ):
 
 
 
-# Properties to return to client
+# Additional properties to return via API
 class Organization( OrganizationInDBBase ):
     pass
 
 
-# Properties stored in DB
+# Additional properties stored in DB
 class OrganizationInDB ( OrganizationInDBBase ):
     pass
