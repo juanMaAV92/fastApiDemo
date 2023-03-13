@@ -1,3 +1,10 @@
+# -----------------------------------------------------------
+# demonstrates how to use FastApi
+#
+# (C) 2023 juanMaAV92, Cali, Colombia
+# Released under GNU Public License (GPL)
+# email juanmanuel.armero@gmail.com
+# -----------------------------------------------------------
 
 import uvicorn
 from fastapi import FastAPI
