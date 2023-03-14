@@ -3,6 +3,7 @@
 from typing import Any, List
 
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
 from app import schemas, models, crud
@@ -13,42 +14,55 @@ router = APIRouter()
 
 @router.get( "", response_model= List[ schemas.Organization ] )
 def read_organizations(
-    db: Session = Depends(deps.get_db),
     skip: int = 0,
-    limit: int = 100
+    limit: int = 100,
+    db: Session = Depends(deps.get_db),
 ) -> Any:
     """
     Retrieve organizations.
     """
     organizations = crud.organization.get_multi( db, skip=skip, limit=limit )
-    return organizations
+    return jsonable_encoder( organizations )
 
 
 @router.post( "", response_model= schemas.Organization )
 def create_organization(
-    *,
-    db: Session = Depends(deps.get_db),
     organization_in: schemas.OrganizationCreate,
+    db: Session = Depends(deps.get_db),
 ) -> Any:
     """
     Create new organization.
     """
-    # TODO: check if the organization already exists
-
+    organization = crud.organization.if_organization( db, obj_in=organization_in )
+    if ( organization ):
+        raise HTTPException(
+            status_code=400, detail="organization already exists in the system"
+        )
     organization = crud.organization.create(db, obj_in=organization_in)
-    return organization
+    return jsonable_encoder( organization )
 
 
 @router.patch( "/{id}", response_model= schemas.Organization )
 def update_organization(
-
+    id: int,
+    organization_in: schemas.OrganizationUpdate,
+    db: Session = Depends(deps.get_db),
 ) -> Any:
-    # TODO: 
-    return []
+    """
+    Update an organization.
+    """
+    organization = crud.organization.get( db, id= id)
+    if not organization:
+        raise HTTPException(
+            status_code=404,
+            detail="Organization not found",
+        )
+    organization = crud.organization.update( db, db_obj= organization, obj_in= organization_in)
+    return jsonable_encoder( organization )
 
 
 @router.get( "/{id}", response_model= schemas.Organization )
-def get_organization_by_id(
+def read_organization_by_id(
     id: int,
     db: Session = Depends(deps.get_db)
 ) -> Any:
@@ -60,7 +74,7 @@ def get_organization_by_id(
         raise HTTPException(
             status_code=404, detail="Organization not found"
         )
-    return organization
+    return jsonable_encoder( organization )
 
 
 @router.delete( "/{id}", response_model= schemas.Organization )
@@ -77,4 +91,4 @@ def delete_organization(
             status_code=404, detail="Organization not found"
         )
     organization = crud.organization.remove( db, id=id)
-    return organization
+    return jsonable_encoder( organization )

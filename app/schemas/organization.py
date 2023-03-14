@@ -1,8 +1,6 @@
 
 from datetime import datetime
 from pydantic import BaseModel, Field
-from typing import Optional
-
 
 # Shared properties
 class OrganizationBase( BaseModel ):
@@ -38,6 +36,10 @@ class OrganizationInDBBase( OrganizationBase ):
 
 # Additional properties to return via API
 class Organization( OrganizationInDBBase ):
+    name: str = Field( min_length=3, max_length=20 )
+    type: str 
+    identification_type: str 
+    identification: str
     pass
 
 

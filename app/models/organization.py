@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import TIMESTAMP, Column, Integer, PrimaryKeyConstraint, String, UniqueConstraint, text
 from sqlalchemy.orm import relationship
 
-from app.db.base import Base
+from app.db.base_class import Base
 
 if TYPE_CHECKING:
     from .headquarter import Headquarter
