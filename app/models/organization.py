@@ -35,6 +35,7 @@ class Organization( Base ):
 
     __table_args__ = (
         PrimaryKeyConstraint( 'id' ),
+        UniqueConstraint('identification_type', 'identification', name='uniq_Identification' ),
         UniqueConstraint( 'name' ),
         UniqueConstraint( 'phone' ),
         UniqueConstraint( 'email' ),
