@@ -1,6 +1,7 @@
 
 from datetime import datetime
 from pydantic import BaseModel, Field
+from uuid import UUID
 
 # Shared properties
 class OrganizationBase( BaseModel ):
@@ -25,7 +26,7 @@ class OrganizationUpdate( OrganizationBase ):
 
 # Properties shared by models stored in DB
 class OrganizationInDBBase( OrganizationBase ):
-    id : int
+    id : UUID
     created_at: datetime
     updated_at: datetime
 

@@ -1,5 +1,5 @@
 
-
+from uuid import UUID
 from typing import Any, List
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -13,7 +13,7 @@ router = APIRouter()
 
 
 @router.get( "", response_model= List[ schemas.Headquarter ] )
-def read_headquarters(
+async def read_headquarters(
     skip: int = 0,
     limit: int = 100,
     organization_id: int = None,
@@ -30,7 +30,7 @@ def read_headquarters(
 
 
 @router.post( "", response_model= schemas.Headquarter )
-def create_headquarter(
+async def create_headquarter(
     headquarter_in: schemas.HeadquarterCreate,
     db: Session = Depends(deps.get_db),
 ) -> Any:
@@ -47,8 +47,8 @@ def create_headquarter(
 
 
 @router.patch( "/{id}", response_model= schemas.Headquarter )
-def update_headquarter(
-    id: int,
+async def update_headquarter(
+    id: UUID,
     headquarter_in: schemas.HeadquarterUpdate,
     db: Session = Depends(deps.get_db),
 ) -> Any:
@@ -68,8 +68,8 @@ def update_headquarter(
 
 
 @router.get( "/{id}", response_model= schemas.Headquarter)
-def get_headquarter_by_id(
-    id: int,
+async def get_headquarter_by_id(
+    id: UUID,
     db: Session = Depends(deps.get_db)
 ) -> Any:
     """
@@ -85,8 +85,8 @@ def get_headquarter_by_id(
 
 
 @router.delete( "/{id}", response_model= schemas.Headquarter)
-def delete_headquarter(
-    id: int,
+async def delete_headquarter(
+    id: UUID,
     db: Session = Depends(deps.get_db)
 ) -> Any:
     """

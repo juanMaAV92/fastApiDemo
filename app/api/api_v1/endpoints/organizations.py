@@ -1,5 +1,5 @@
 
-
+from uuid import UUID
 from typing import Any, List
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -13,7 +13,7 @@ router = APIRouter()
 
 
 @router.get( "", response_model= List[ schemas.Organization ] )
-def read_organizations(
+async def read_organizations(
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(deps.get_db),
@@ -26,7 +26,7 @@ def read_organizations(
 
 
 @router.post( "", response_model= schemas.Organization )
-def create_organization(
+async def create_organization(
     organization_in: schemas.OrganizationCreate,
     db: Session = Depends(deps.get_db),
 ) -> Any:
@@ -43,8 +43,8 @@ def create_organization(
 
 
 @router.patch( "/{id}", response_model= schemas.Organization )
-def update_organization(
-    id: int,
+async def update_organization(
+    id: UUID,
     organization_in: schemas.OrganizationUpdate,
     db: Session = Depends(deps.get_db),
 ) -> Any:
@@ -62,8 +62,8 @@ def update_organization(
 
 
 @router.get( "/{id}", response_model= schemas.Organization )
-def read_organization_by_id(
-    id: int,
+async def read_organization_by_id(
+    id: UUID,
     db: Session = Depends(deps.get_db)
 ) -> Any:
     """
@@ -78,8 +78,8 @@ def read_organization_by_id(
 
 
 @router.delete( "/{id}", response_model= schemas.Organization )
-def delete_organization(
-    id: int,
+async def delete_organization(
+    id: UUID,
     db: Session = Depends(deps.get_db)
 ) -> Any:
     """

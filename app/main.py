@@ -14,9 +14,11 @@ from app.api.api_v1.api import api_router
 from app.core.config import settings
 from app.db.session import engine
 from app.db.base_class import Base
+import app.db.revision as revision
 
 
 Base.metadata.create_all( bind= engine )
+revision.is_last( engine )
 
 app = FastAPI(
     title = settings.PROJECT_NAME, 

@@ -2,7 +2,7 @@
 from datetime import datetime
 from pydantic import BaseModel, Field
 from typing import Optional
-
+from uuid import UUID
 
 # Shared properties
 class HeadquarterBase( BaseModel ):
@@ -25,7 +25,7 @@ class HeadquarterUpdate( HeadquarterBase ):
 
 # Properties shared by models stored in DB
 class HeadquarterInDBBase( HeadquarterBase ):
-    id : int
+    id : UUID
     created_at: datetime
     updated_at: datetime
 
