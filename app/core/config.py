@@ -1,10 +1,14 @@
 
-import os
+from os import path
+from os import environ as env
 from functools import lru_cache
 
 from typing import Any, Dict, Optional
 from pydantic import BaseSettings, EmailStr, PostgresDsn, validator
 
+separador = path.sep
+dir_actual = path.dirname(path.abspath(__file__))
+dir = separador.join(dir_actual.split(separador)[:-2])
 
 class Settings( BaseSettings ):
 
@@ -46,17 +50,25 @@ class Settings( BaseSettings ):
     FIRST_SUPERUSER_PASSWORD : str
     USERS_OPEN_REGISTRATION : bool = False
 
-    class Config :
-        separador = os.path.sep
-        dir_actual = os.path.dirname(os.path.abspath(__file__))
-        dir = separador.join(dir_actual.split(separador)[:-2])
+    class Config :        
         env_file = dir + '/.env'
         env_file_encoding = 'utf-8'
         case_sensitive = True
 
+
+class ProductionSettings(Settings):
+    class Config:
+        env_file = dir +  '/.env.production'
+
+
+class DevelopmentSettings(Settings):
+    class Config:
+        env_file = dir +  '/.env.development'
+
+
 @lru_cache
 def get_settings() -> Settings:
-    return Settings()
+    return DevelopmentSettings() if env.get('ENV') == 'development' else ProductionSettings()
 
 
 settings = get_settings()

@@ -11,7 +11,7 @@ services:
       - '6500:5432'
     restart: always
     env_file:
-      - ./.env 
+      - env.tmp
     
     
 volumes:

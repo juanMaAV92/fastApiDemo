@@ -5,10 +5,11 @@ This is an exercise to learn how use FastApi
 Run in local
 
 ```sh
-docker-compose up -d
-
 cd ~/fastApiDemo
-export PYTHONPATH=$PWD
+bash script/setup_env.sh development
+# in deploy change development => production
+
+source .venv/bin/activate
 poetry run python app/main.py
 ```
 
