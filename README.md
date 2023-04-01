@@ -6,9 +6,11 @@ Run in local
 
 ```sh
 cd ~/fastApiDemo
-bash script/setup_env.sh development
+bash ./script/setup_env.sh development > .env.tmp
 # in deploy change development => production
-
+set -a
+source .env.tmp
+set +a
 source .venv/bin/activate
 poetry run python app/main.py
 ```
