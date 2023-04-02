@@ -9,8 +9,11 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
 
 from app.api.api_v1.api import api_router
+from app.core.exceptions.exceptionsMiddleware import ExceptionsMiddleware
+from app.core.exceptions.handlers.validation import validation_exception_handler
 from app.core.config import settings
 from app.db.session import engine
 from app.db.base_class import Base
@@ -20,6 +23,7 @@ import app.db.revision as revision
 Base.metadata.create_all( bind= engine )
 revision.is_last( engine )
 
+
 app = FastAPI(
     title = settings.PROJECT_NAME, 
     description = settings.PROJECT_DESCRIPTION,
@@ -27,8 +31,12 @@ app = FastAPI(
     
     docs_url = settings.PROJECT_DOCS_URL,
     redoc_url = settings.PROJECT_REDOC_URL,    
+
     openapi_url = f"{settings.API_V_STR}/openapi.json"
 )
+
+app.add_middleware( ExceptionsMiddleware )
+app.add_exception_handler( RequestValidationError, validation_exception_handler)
 
 
 @app.get( f'/health', tags=[ 'health' ] )
@@ -38,7 +46,6 @@ async def health():
 
 
 app.include_router( api_router, prefix= settings.API_V_STR )
-
 
 
 def run():

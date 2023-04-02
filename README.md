@@ -8,6 +8,7 @@ Run in local
 cd ~/fastApiDemo
 bash ./script/setup_env.sh development > .env.tmp
 # in deploy change development => production
+docker-compose up -d
 set -a
 source .env.tmp
 set +a
