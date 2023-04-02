@@ -16,7 +16,7 @@ router = APIRouter()
 async def read_headquarters(
     skip: int = 0,
     limit: int = 100,
-    organization_id: int = None,
+    organization_id: UUID = None,
     db: Session = Depends(deps.get_db),
 ) -> Any:
     """

@@ -10,7 +10,7 @@ class HeadquarterBase( BaseModel ):
     address: str
     phone: str
     email: str
-    organization_id: Optional[ int ] = None  
+    organization_id: Optional[ UUID ] = None  
 
 
 # Properties to receive via API on creation
@@ -41,4 +41,10 @@ class Headquarter( HeadquarterInDBBase ):
 
 # Additional properties stored in DB
 class HeadquarterInDB ( HeadquarterInDBBase ):
+    pass
+
+
+# seed population properties 
+class HeadquarterSeed( HeadquarterCreate ):
+    id : UUID
     pass

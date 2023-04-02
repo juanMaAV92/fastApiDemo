@@ -47,3 +47,11 @@ class Organization( OrganizationInDBBase ):
 # Additional properties stored in DB
 class OrganizationInDB ( OrganizationInDBBase ):
     pass
+
+
+
+
+# seed population properties 
+class OrganizationSeed( OrganizationCreate ):
+    id : UUID
+    pass

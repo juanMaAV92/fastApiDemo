@@ -13,5 +13,5 @@ class ExceptionsMiddleware( BaseHTTPMiddleware ):
             return await call_next( request )
         except Exception as exc:
             body = await request.body()
-            detail = {"errors": exc.errors(), "body": body.decode()}
+            # detail = {"errors": exc.errors(), "body": body.decode()}
             return JSONResponse( status_code= 500, content={ 'error': str(exc) } )
