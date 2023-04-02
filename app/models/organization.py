@@ -5,8 +5,10 @@ import uuid
 from sqlalchemy import TIMESTAMP, Column, Integer, PrimaryKeyConstraint, String, UniqueConstraint, text
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Enum as sqlEnum
 
 from app.db.base_class import Base
+from app.schemas.organization import IdentificationType
 
 if TYPE_CHECKING:
     from .headquarter import Headquarter
@@ -15,12 +17,11 @@ if TYPE_CHECKING:
 class Organization( Base ):
     __tablename__ = 'organizations'
 
-    # id =                    Column( Integer, index= True )
     id =                    Column( UUID( as_uuid= True ), default= uuid.uuid4 )
     name =                  Column( String, nullable= False )
     description =           Column( String, nullable= False )
     type =                  Column( String, nullable= False )
-    identification_type =   Column( String, nullable= False )
+    identification_type =   Column( sqlEnum(IdentificationType), nullable= False )
     identification =        Column( String, nullable= False )
     address =               Column( String, nullable= False )
     phone =                 Column( String, nullable= False )

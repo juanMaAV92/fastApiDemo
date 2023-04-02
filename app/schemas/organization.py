@@ -1,8 +1,15 @@
 
-from datetime import datetime
 import re
-from pydantic import BaseModel, Field, validator
+from datetime import datetime
 from uuid import UUID
+from enum import Enum
+from pydantic import BaseModel, Field, validator
+
+
+class IdentificationType(str, Enum):
+    CC = 'CC'
+    NIT = 'NIT'
+    
 
 # Shared properties
 class OrganizationBase( BaseModel ):
@@ -29,7 +36,7 @@ class OrganizationBase( BaseModel ):
 class OrganizationCreate( OrganizationBase ):
     name: str = Field( min_length=3, max_length=20 )
     type: str 
-    identification_type: str 
+    identification_type: IdentificationType 
     identification: str
 
    
