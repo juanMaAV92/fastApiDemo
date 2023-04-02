@@ -1,6 +1,7 @@
 
 from datetime import datetime
-from pydantic import BaseModel, Field
+import re
+from pydantic import BaseModel, Field, validator
 from uuid import UUID
 
 # Shared properties
@@ -10,6 +11,19 @@ class OrganizationBase( BaseModel ):
     phone: str
     email: str
 
+    @validator('phone')
+    def validate_phone( cls, v ):
+        if not bool(re.match(r"^\+[0-9]{10,10}$", v)):
+            raise ValueError("invalid phone number format")
+        return v
+
+    @validator('email')
+    def validate_email( cls, v ):
+        if not bool(re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", v)):
+            raise ValueError("invalid email format")
+        return v
+    
+
 
 # Properties to receive via API on creation
 class OrganizationCreate( OrganizationBase ):
@@ -18,7 +32,7 @@ class OrganizationCreate( OrganizationBase ):
     identification_type: str 
     identification: str
 
-
+   
 # Properties to receive via API on update
 class OrganizationUpdate( OrganizationBase ):
     pass
